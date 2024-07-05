@@ -155,11 +155,11 @@ def login(driver, username, password):
 
 def main():
     options = Options()
-    driver_path = 'C:\\Users\\yuesen\\.cache\\selenium\\msedgedriver\\win64\\126.0.2592.68\\msedgedriver.exe'
+    driver_path = 'Enter the address of your msedgedriver.exe here'
     service = Service(executable_path=driver_path)
 
     # 读取Excel文件
-    excel_path = "C:\\Users\\yuesen\\Desktop\\pingjiao.xlsx"
+    excel_path = "Enter the address of the form where the account number will be stored"
     accounts_df = pd.read_excel(excel_path)
 
     for index, row in accounts_df.iterrows():
@@ -171,7 +171,7 @@ def main():
         try:
             # 访问评教系统首页
             driver.get(
-                'https://jw.sdyu.edu.cn/jwglxt/xspjgl/xspj_cxXspjIndex.html?doType=details&gnmkdm=N401605&layout=default&su=202302710222'
+                'https://jw.sdyu.edu.cn/jwglxt/xspjgl/xspj_cxXspjIndex.html?doType=details&gnmkdm=N401605&layout=default&su=888888888888'
             )
 
             # 登录
