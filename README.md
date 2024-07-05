@@ -37,6 +37,7 @@ python pingjiao.py
 1.This script is based on the xpath path to locate the elements, is relatively fixed, not flexible choice, and different school system layout is different, most likely not available!! 
 2.This version of the execution speed is not the fastest, there is a need to optimize the waiting time according to their own network speed. 
 3.This script is based on the edge browser and requires the Edgedriver to be installed and the Edgedriver path to be configured in the code. https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/?form=MA13LH
+Please download the same version of Edgedriver as the browser itself, otherwise it may not work
 4.There is also a point that the program is a single thread one by one evaluation of teaching, with high concurrency requirements of the current author limited to technical reasons can not achieve.
 
 ## Contributing
