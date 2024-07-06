@@ -50,7 +50,8 @@ Contributions are welcome! Please follow these steps to contribute:
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the [Apache-2.0 License](LICENSE).
+
 
 ## Disclaimer
 
