@@ -188,7 +188,7 @@ def has_next_page(driver):
         print(f"[has_next_page] 解析数字 => 当前页: {cur}, 总页: {tot}")
 
         # 如果系统从 0 开始计数，则 < tot 表示还有下一页
-        if cur + 1 < tot:
+        if cur < tot:
             print("[has_next_page] 还有下一页")
             return True
         else:
@@ -274,52 +274,31 @@ def grade(driver):
         print(f"[grade] 发生未知错误: {e}")
 
 
-def submit(driver, max_retries=3):
+def submit(driver):
     """
-    点击“提交”按钮，然后点击确认。
-    遇到网络卡顿时刷新页面并重试(最多 max_retries 次)。
+    点击页面上的“提交”按钮，然后确认对话框
     """
     print("\n[submit] ---------------------------------------------")
-    attempts = 0
-    while attempts < max_retries:
-        attempts += 1
-        print(f"[submit] 尝试第 {attempts} 次提交...")
-        try:
-            wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 10)
 
-            submit_button = wait.until(
-                EC.element_to_be_clickable((By.XPATH,
-                                            '/html/body/div[2]/div/div/div[3]/div[2]/div/div[3]/form/div[2]/div[2]/div/div/div/button[2]'))
-            )
-            print("[submit] 找到'提交'按钮，点击...")
-            submit_button.click()
+    try:
+        submit_button = wait.until(
+            EC.element_to_be_clickable((By.XPATH,
+                                        '//*[@id="btn_xspj_tj"]'))
+        )
+        print("[submit] 找到'提交'按钮，点击...")
+        submit_button.click()
 
-            confirm_button = wait.until(
-                EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[3]/button'))
-            )
-            print("[submit] 找到二次确认按钮，点击...")
-            confirm_button.click()
-            print("[submit] 提交完成.")
-
-            # 如果成功执行到这里，就 break 跳出重试循环
-            break
-
-        except TimeoutException:
-            # 提交或确认按钮在 10 秒内不可点击 => 可能网络卡顿
-            print("[submit] 等待按钮超时，尝试刷新页面后重试...")
-            driver.refresh()
-            time.sleep(3)  # 给点时间重新加载
-
-        except Exception as e:
-            # 其他异常可以直接抛，或也尝试刷新
-            print(f"[submit] 发生异常: {e}")
-            driver.refresh()
-            time.sleep(3)
-            # 也可以 break 或者继续重试，看你需求
-
-    else:
-        # 如果 while 正常结束(没有break)，说明重试用尽但仍失败
-        print(f"[submit] 提交重试 {max_retries} 次后仍失败，可能网络或页面异常。")
+        confirm_button = wait.until(
+            EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[3]/button'))
+        )
+        print("[submit] 找到二次确认按钮，点击...")
+        confirm_button.click()
+        print("[submit] 提交完成.")
+    except TimeoutException:
+        print("[submit] 提交按钮或确认按钮在10s内不可点击，可能页面结构有变动或网络过慢。")
+    except Exception as e:
+        print(f"[submit] 提交发生异常: {e}")
 
 
 def check_submit(driver):
