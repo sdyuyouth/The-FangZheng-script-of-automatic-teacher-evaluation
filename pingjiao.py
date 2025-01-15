@@ -332,6 +332,14 @@ def main():
     print("\n[main] *************************************************")
     print("[main] 准备启动 EdgeDriver...")
     options = Options()
+    options.add_argument('--start-maximized')
+    options.add_argument("--mute-audio")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--incognito")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    # options.add_argument('--headless')
+
     driver_path = r'D:\edgedownload\edgedriver_win64\msedgedriver.exe'
     service = Service(executable_path=driver_path)
 
